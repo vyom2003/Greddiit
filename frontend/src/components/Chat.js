@@ -1,6 +1,5 @@
-import { element } from 'prop-types';
 import React, { useEffect, useState } from 'react'
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Chatitem from './Chatitem';
 export default function Chat(props) {
     const [mutual, setMutual] = useState([])

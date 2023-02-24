@@ -12,7 +12,11 @@ export default function Mysub(props) {
     setNewG(1 - newG);
     setEmp(0);
   }
-  
+  const [name,setn] =useState("")
+  const [d,setd] =useState("")
+  const [tags,settags] =useState("")
+  const [ban,setban] =useState("")
+
   useEffect(() => {
     (async function () {
       let data = {
@@ -33,7 +37,25 @@ export default function Mysub(props) {
       }
     })();
   }, []);
-  
+  const HandleN=(e)=>{
+    setn(e.target.value)
+  }
+  const HandleD=(e)=>{
+    setd(e.target.value)
+  }
+  const HandleT=(e)=>{
+    settags(e.target.value)
+  }
+  const HandleB=(e)=>{
+    setban(e.target.value)
+  }
+  const CheckDisable=()=>{
+    if(name===""||d===""||tags===""||ban==="")
+    {
+      return true;
+    }
+    else return false;
+  }
   const CreateNew = async (e) => {
     e.preventDefault();
     if (document.getElementById("subname").value === "" || document.getElementById("subdesc").value === "" || document.getElementById("subtag").value === "" || document.getElementById("subban").value === "") {
@@ -89,21 +111,21 @@ export default function Mysub(props) {
             <form style={{ marginTop: "10px", textAlign: "left" }} onSubmit={CreateNew}>
               <div className="mb-3">
                 <label htmlFor="subname" className="form-label">Name</label>
-                <input type="text" className="form-control" id="subname" placeholder="Enter Name" />
+                <input type="text" value={name} onChange={HandleN} className="form-control" id="subname" placeholder="Enter Name" />
               </div>
               <div className="mb-3">
                 <label htmlFor="subdesc" className="form-label">Description</label>
-                <textarea rows="4" cols="50" type="text" className="form-control" id="subdesc" placeholder="Enter Description" />
+                <textarea rows="4" cols="50" value={d} onChange={HandleD} type="text" className="form-control" id="subdesc" placeholder="Enter Description" />
               </div>
               <div className="mb-3">
                 <label htmlFor="subtags" className="form-label">Tags</label>
-                <input type="text" className="form-control" id="subtag" placeholder="Enter Tags" />
+                <input type="text" value={tags} onChange={HandleT} className="form-control" id="subtag" placeholder="Enter Tags" />
               </div>
               <div className="mb-3">
                 <label htmlFor="subban" className="form-label">Banned Keywords</label>
-                <input type="text" className="form-control" id="subban" placeholder="Enter Banned Keywords" />
+                <input type="text" value={ban} onChange={HandleB} className="form-control" id="subban" placeholder="Enter Banned Keywords" />
               </div>
-              <button type="submit" className="btn btn-primary">Create</button>
+              <button disabled={CheckDisable()} type="submit" className="btn btn-primary">Create</button>
             </form>
             <br />
           </div>

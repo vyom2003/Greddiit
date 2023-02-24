@@ -11,6 +11,7 @@ export default function SubPage(props) {
     const [done, setdone] = useState(0)
     const [create, setCreate] = useState(0);
     const [posts, setposts] = useState([]);
+    const  [con,setC] =useState("")
     const bannedString = (a) => {
         let str = ""
         for (let i = 0; i < a.length - 1; i++) {
@@ -58,6 +59,9 @@ export default function SubPage(props) {
             window.location.reload(false)
             setCreate(1 - create)
         }
+    }
+    const HandleC=(e)=>{
+        setC(e.target.value)
     }
     useEffect(() => {
         (async function () {
@@ -126,8 +130,8 @@ export default function SubPage(props) {
                                 </div>
                             </div> : null
                         }
-                        {create ? <><h1><MdOutlineLocalPostOffice />{" "}Create A Post</h1><textarea id="postContent" placeholder="Enter Content" style={{ width: "80%", height: "200px", fontSize: "20px" }}></textarea><br /><br />
-                            <button className="btn btn-secondary" style={{ margin: "10px" }} onClick={SubmitPost}>Submit</button>
+                        {create ? <><h1><MdOutlineLocalPostOffice />{" "}Create A Post</h1><textarea id="postContent" value={con} onChange={HandleC} placeholder="Enter Content" style={{ width: "80%", height: "200px", fontSize: "20px" }}></textarea><br /><br />
+                            <button className="btn btn-secondary" disabled={con==""} style={{ margin: "10px" }} onClick={SubmitPost}>Submit</button>
                         </> : null}
                         {!create ? <>
                             {done ? (posts.map((element) => {

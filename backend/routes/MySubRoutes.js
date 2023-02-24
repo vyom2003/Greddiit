@@ -206,6 +206,10 @@ router.put("/sub/:id", async (req, res) => {
     const user_ID = decoded.id;
     const sub = await subgreddiit.findOne({ name: req.body.name, followers: user_ID })
     const user_find = await user.findOne({ _id: user_ID })
+    if(req.body.postContent=="")
+    {
+        res.status(400).send("Post empty")
+    }
     if (!sub) {
         res.status(400).send("Authorisation denied")
     }
